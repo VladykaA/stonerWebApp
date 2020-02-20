@@ -41,7 +41,7 @@ public class StoneFactory {
         }
         return value;
     }
-    
+
     private static Stone[] stones;
 
     static {
