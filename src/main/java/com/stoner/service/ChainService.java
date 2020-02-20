@@ -12,13 +12,5 @@ public class ChainService {
         return ChainFactory.getRandomChain();
     }
 
-    Locale[] supportedLocales = {
-            Locale.ENGLISH,
-            Locale.forLanguageTag("ua")
-    };
-
-    ResourceBundle labels = ResourceBundle.getBundle("LabelsBundle_en");
-
-
 }
 

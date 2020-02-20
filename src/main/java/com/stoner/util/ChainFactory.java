@@ -9,17 +9,6 @@ import java.util.stream.IntStream;
 
 public class ChainFactory {
 
-    public static final Random RANDOM = new Random();
-
-    private static Chain[] chains;
-
-    static {
-
-        chains = new Chain[]{
-                getChain()
-        };
-    }
-
     private static Chain getChain() {
         Chain chain = new Chain("Gold", "red stone",
                 new BigDecimal(100));
@@ -31,11 +20,7 @@ public class ChainFactory {
     }
 
     public static Chain getRandomChain() {
-        int index = RANDOM.nextInt(chains.length);
-        return chains[index];
+
+        return getChain();
     }
-
-
-
-
 }

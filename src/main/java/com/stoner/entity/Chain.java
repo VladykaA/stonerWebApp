@@ -11,7 +11,7 @@ public class Chain extends Material implements Serializable {
     public Chain(String name, String type, BigDecimal weight) {
         super(name);
         this.weight = weight;
-        stones = new Stone[10];
+        stones = new Stone[4];
     }
 
     public BigDecimal getWeight() {
@@ -41,7 +41,7 @@ public class Chain extends Material implements Serializable {
 
     private void resize() {
         if (stones[stones.length - 1] != null) {
-            Stone[] temp = new Stone[stones.length * 2];
+            Stone[] temp = new Stone[stones.length + 1];
 
             for (int i = 0; i < stones.length; i++) {
                 temp[i] = stones[i];

@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 public class StoneFactory {
 
     public static final Random RANDOM = new Random();
+    private static int indexLanguage = 0;
 
     private final static String[] NAMES = {
             "gemstone.diamond.name",
@@ -25,46 +26,37 @@ public class StoneFactory {
             "semiprecious.aquamarine.name"
     };
 
-    Locale[] supportedLocales = {
+    private static final Locale[] SUPPORTED_LOCALES = {
             Locale.ENGLISH,
             Locale.forLanguageTag("ua")
     };
 
-    ResourceBundle labels = ResourceBundle.getBundle("LabelsBundle", supportedLocales[0]);
-
-    public static String getName(ResourceBundle labels){
-        Enumeration bundleKeys = labels.getKeys();
-        String value = "";
-        while (bundleKeys.hasMoreElements()){
-            String key = (String) bundleKeys.nextElement();
-            value = labels.getString(key);
-        }
-        return value;
+    public static ResourceBundle getLabels() {
+        return ResourceBundle.getBundle("LabelsBundle", SUPPORTED_LOCALES[indexLanguage]);
     }
 
-    private static Stone[] stones;
-
-    static {
-        stones = new Stone[10];
-        IntStream.range(0, stones.length).forEach(i -> stones[i] = getStone());
+    public static void setIndexLanguage(int indexLanguage) {
+        StoneFactory.indexLanguage = indexLanguage;
     }
 
-    private static Stone getStone() {
-        return setStone(new Stone(NAMES[RANDOM.nextInt(NAMES.length)],
-                new BigDecimal(getRandomNum(10, 100)), new BigDecimal(getRandomNum(1, 10)),
-                Transparency.randomTransparency(), Color.randomColor()));
+    public static int getIndexLanguage() {
+        return indexLanguage;
+    }
+
+    public static String getName() {
+
+        return getLabels().getString(NAMES[RANDOM.nextInt(NAMES.length)]);
     }
 
     public static Stone getRandomStone() {
-        int index = RANDOM.nextInt(stones.length);
-        return stones[index];
+        return getStone();
     }
 
-    private static int getRandomNum(int min, int max) {
+    private static BigDecimal getRandomNum(int min, int max) {
         if (min >= max) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Wrong input");
         }
-        return RANDOM.nextInt((max - min) + 1) + min;
+        return new BigDecimal(RANDOM.nextInt((max - min) + 1) + min);
     }
 
     private static Stone setStone(Stone stone) {
@@ -75,11 +67,16 @@ public class StoneFactory {
             case "Ruby":
             case "Emerald":
             case "Topaz":
-                stone.setType("gemstone.type");
+                stone.setType(getLabels().getString("gemstone.type"));
                 break;
             default:
-                stone.setType("semiprecious.type");
+                stone.setType(getLabels().getString("semiprecious.type"));
         }
         return stone;
+    }
+
+    private static Stone getStone() {
+        return setStone(new Stone(getName(), getRandomNum(10, 100), getRandomNum(1, 10),
+                Transparency.randomTransparency(), Color.randomColor()));
     }
 }

@@ -52,15 +52,4 @@ public class Stone extends Material implements Serializable {
         this.color = color;
     }
 
-    @Override
-    public String toString() {
-        return "Stone{" +
-                "name=" + getName()+
-                "type=" + getType()+
-                "price=" + price +
-                ", carat=" + carat +
-                ", transparency=" + transparency +
-                ", color=" + color +
-                '}';
-    }
 }

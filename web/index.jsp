@@ -12,8 +12,8 @@
 
   <div>
     <div>
-      <button onclick="location.href='/stonesList'">List of stones</button>
       <button onclick="location.href='/createNecklaces'">Create a chain</button>
+      <button onclick="location.href='/stonesList'">Stone list</button>
       <button onclick="location.href='/en_ua'">EN/UA</button>
     </div>
   </div>

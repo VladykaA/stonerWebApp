@@ -15,8 +15,8 @@ public enum Transparency {
     private int valueFrom;
     private int valueTo;
 
-    private static final List<Transparency> TRANSPARENCIES = Collections.unmodifiableList(Arrays.asList(values()));
-    private static final int SIZE = TRANSPARENCIES.size();
+    private static final List<Transparency> TRANSPARENCIES =
+            Collections.unmodifiableList(Arrays.asList(values()));
     private static final Random RANDOM = new Random();
 
     Transparency(int valueFrom, int valueTo) {
@@ -29,7 +29,7 @@ public enum Transparency {
     }
 
     public static Transparency randomTransparency(){
-        return TRANSPARENCIES.get(RANDOM.nextInt(SIZE));
+        return TRANSPARENCIES.get(RANDOM.nextInt(TRANSPARENCIES.size()));
     }
 
 }
